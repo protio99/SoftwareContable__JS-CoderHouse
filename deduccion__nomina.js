@@ -23,7 +23,7 @@ class Empleado{ //Clase para crear empleado
 }
 
 let numeroEmpleados = parseInt(prompt("Ingrese la cantidad de empleados que desea crear: "));
-let listaEmpleados = {};
+let listaEmpleados = [];
 
 
 function pedirDatosEmpleado(){
