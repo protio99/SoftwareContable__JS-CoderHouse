@@ -8,6 +8,11 @@ body{
  
     font-family: 'Josefin Sans', sans-serif; 
 }
+
+a {
+    text-decoration: none;
+    color: black;
+}
 .paginaPrincipal__menu{
     display: flex;
     flex-wrap: wrap;

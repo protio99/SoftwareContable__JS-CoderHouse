@@ -24,48 +24,65 @@
 <body>
 
     <!-- <script src="deduccion__nomina.js"></script>  -->
-    <script src="personal.js"></script>
-    <h1 class="titulo__principal">Bienvenido al sistema de nomina BEMU</h1>
+    <h1 class="titulo__principal">Bienvenido al sistema de nomina BEMU, <i id="user_name"></i></h1>
     <div class="paginaPrincipal">
         <h3 class="subtitulo">Menu</h3>
         <div class="paginaPrincipal__menu">
-            <div class="paginaPrincipal__menu-card">
-                <i class="fas fa-users"></i>
-                <p>Personal</p>
-            </div>
-            <div class="paginaPrincipal__menu-card">
-                <i class="far fa-clock"></i>
-                <p>Horarios y turnos</p>
-            </div>
+            <a href="./personal.html">
+                <div class="paginaPrincipal__menu-card">
+                    <i class="fas fa-users"></i>
+                    <p>Personal</p>
+                </div>
+            </a>
+            <a href="./horarios_turnos.html">
+                <div class="paginaPrincipal__menu-card">
+                    <i class="far fa-clock"></i>
+                    <p>Horarios y turnos</p>
+                </div>
+            </a>
 
-            <div class="paginaPrincipal__menu-card">
-                <i class="fas fa-file-invoice-dollar"></i>
-                <p>Colillas de Pago</p>
-            </div>
-            <div class="paginaPrincipal__menu-card">
-                <i class="fas fa-piggy-bank"></i>
-                <p>Cesantias</p>
-            </div>
-            <div class="paginaPrincipal__menu-card">
-                <i class="fas fa-hard-hat"></i>
-                <p>Seguridad Social</p>
-            </div>
-            <div class="paginaPrincipal__menu-card">
-                <i class="fas fa-ban"></i>
-                <p>Liquidación</p>
-            </div>
-            <div class="paginaPrincipal__menu-card">
-                <i class="fas fa-suitcase-rolling"></i>
-                <p>Vacaciones</p>
-            </div>
-            <div class="paginaPrincipal__menu-card">
-                <i class="fas fa-money-bill-wave-alt"></i>
-                <p>Provisiones</p>
-            </div>
-            <div class="paginaPrincipal__menu-card">
-                <i class="fas fa-coins"></i>
-                <p>Primas</p>
-            </div>
+            <a href="./colillasPagos.html">
+                <div class="paginaPrincipal__menu-card">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <p>Colillas de Pago</p>
+                </div>
+            </a>
+            <a href="./cesantias.html">
+                <div class="paginaPrincipal__menu-card">
+                    <i class="fas fa-piggy-bank"></i>
+                    <p>Cesantias</p>
+                </div>
+            </a>
+            <a href="./seguridadSocial.html">
+                <div class="paginaPrincipal__menu-card">
+                    <i class="fas fa-hard-hat"></i>
+                    <p>Seguridad Social</p>
+                </div>
+            </a>
+           <a href="./liquidacion.html">
+                <div class="paginaPrincipal__menu-card">
+                    <i class="fas fa-ban"></i>
+                    <p>Liquidación</p>
+                </div>
+           </a>
+            <a href="./vacaciones.html">
+                <div class="paginaPrincipal__menu-card">
+                    <i class="fas fa-suitcase-rolling"></i>
+                    <p>Vacaciones</p>
+                </div>
+            </a>
+           <a href="./provisiones.html">
+                <div class="paginaPrincipal__menu-card">
+                    <i class="fas fa-money-bill-wave-alt"></i>
+                    <p>Provisiones</p>
+                </div>
+           </a>
+            <a href="./primas.html">
+                <div class="paginaPrincipal__menu-card">
+                    <i class="fas fa-coins"></i>
+                    <p>Primas</p>
+                </div>
+            </a>
             <div class="paginaPrincipal__menu-card">
                 <i class="fas fa-cogs"></i>
                 <p>Configuración</p>
@@ -73,6 +90,7 @@
 
         </div>
     </div>
+    <script src="personal.js"></script>
 
 </body>
 </html>
