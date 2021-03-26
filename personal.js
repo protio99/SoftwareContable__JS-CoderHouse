@@ -41,7 +41,7 @@ const usuario = {
 
 //Obteniendo datos ingresados por el usuario
 
-let inpNombre = document.getElementById("ainpNombrepp");
+let inpNombre = document.getElementById("inpNombre");
 let inpApellido = document.getElementById("inpApellido");
 let inpNumDocumento = document.getElementById("inpNumDocumento");
 let inpDocumento = document.getElementsByName("documento");
