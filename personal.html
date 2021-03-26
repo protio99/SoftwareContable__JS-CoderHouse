@@ -4,9 +4,70 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="personal.css">
     <title>Personal</title>
 </head>
 <body>
+    <h2>Personal </h2>
+    <hr>
+    <div id="divisionPrincipal">
+        <div >
+            <h3>Registrar Personal</h3>
+            <form >
+                <input type="text" value="Nombre" id="inpNombre">
+                <input type="text" value="Apellidos" id="inpApellido">
+                <p>Tipo de documento</p>
+                
+                    <input type="radio" name="documento" value="cedula" >
+                    <label for="cedula">Cedula ciudadania</label><br>
+                    <input type="radio" name="documento" value="extranjeria">
+                    <label for="extranjeria">Cedula extranjeria</label><br>
+                    <input type="radio" name="documento" value="ti">
+                    <label for="ti">Tarjeta de identidad</label><br>
+                    <p>Numero documento</p>
+                    <input type="number" value="Numero documento" id="inpNumDocumento">
+                
+                <p>Fecha de nacimiento</p>
+                <input type="date" name="Fecha de nacimiento" id="inpFechaNacimiento">
+                <input type="text" name="Lugar de Nacimiento" value="Lugar de nacimiento" id="inpLugarNacimiento">
+                <p>Edad</p>
+                <input type="number" name="Edad" value="Edad" id="inpEdad">
+                <p>Direccion de residencia</p>               
+                <input type="text" name="Direccion" value="Direccion" id="inpDirResidencia">
+                <p>Telefono</p>          
+                <input type="number" name="telefono" value="telefono" id="inpTel">
+                <p>Estado civil</p>
+                <input type="radio" name="estado_civil" value="soltero">
+                <label for="soltero">Soltero</label><br>
+
+                <input type="radio" name="estado_civil" value="casado">
+                <label for="casado">Casado</label><br>
+
+                <input type="radio" name="estado_civil" value="otro">
+                <label for="otro">Otro</label><br>
+
+                <p>Salario</p>
+                <input type="number" name="salario" value="salario" id="inpSalario"><br>
+                <input type="button" value="Agregar" id="btnAgregar">
+                <input type="button" value="Limpiar" id="btnLimpiar">
+                <input type="button" value="Tabla" id="btnTabla">
+
+
+
+
+
+
+
+
+            </form>
+        </div>
+        <div id="visualizacionTablaPersonal">
+            <h3>Lista de personal registrado</h3>
+        </div>
+
+    </div>
     
 </body>
+<script src="personal.js"></script>
+
 </html>
