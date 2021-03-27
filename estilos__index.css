@@ -1,12 +1,10 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
+
 body{
     background-color: #8EC5FC;
     background-image: linear-gradient(62deg, #8EC5FC 0%, #d7b2fa 100%);
-    
-
-    
-    
- 
-    font-family: 'Josefin Sans', sans-serif; 
+    font-family: "Nunito", sans-serif;
+    /* font-family: 'Josefin Sans', sans-serif;  */
 }
 
 a {
@@ -22,7 +20,7 @@ a {
 
 }
 
-.paginaPrincipal__menu-card{
+/* .paginaPrincipal__menu-card{
     
     display: flex;
     flex-direction: column;
@@ -42,7 +40,7 @@ a {
     font-size: 3rem;
     margin-top: 1rem;
     color: beige;
-}
+} */
 
 .titulo__principal{
     font-family: 'Josefin Sans', sans-serif;
