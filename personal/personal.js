@@ -24,7 +24,11 @@ class Empleado {
     this.salario = salario;
   }
 }
+
 let listaEmpleados = [];
+
+
+//-------------------------------
 
 //Obteniendo datos ingresados por el usuario
 
@@ -38,10 +42,10 @@ let inpDirResidencia = document.getElementById("inpDirResidencia");
 let inpTel = document.getElementById("inpTel");
 let inpSalario = document.getElementById("inpSalario");
 let visualizacion = document.getElementById("visualizacionTablaPersonal");
-
+cargarEmpleados();
 // Agregando eventos
 //-----------------------------------------------
-// Avisos de botones
+// Acciones botones, boton agregar
 
 let btnAgregar = document.getElementById("btnAgregar");
 btnAgregar.addEventListener("click", respuestaBtnAgregar);
@@ -61,14 +65,36 @@ function respuestaBtnAgregar() {
   );
   listaEmpleados.push(usu);
   mostrarDatos();
+  guardaEmpleadosLocalStorage();
   console.log(listaEmpleados);
 }
+// -----Almacenando datos ingresados por el usuario en el local storage------
+
+function guardaEmpleadosLocalStorage(){
+  let listaEmpleadosEnString = JSON.stringify(listaEmpleados);
+  localStorage.setItem('listaEmpleados', listaEmpleadosEnString);
+}
+
+
+
+function cargarEmpleados(){
+  let listaStorage = JSON.parse(localStorage.getItem('listaEmpleados'));
+  console.log(listaStorage);
+  if (listaStorage != null) {
+    listaEmpleados = listaStorage
+    
+    mostrarDatos();
+  }
+}
+
+// Mensaje consola de boton limpiar
 
 let btnLimpiar = document.getElementById("btnLimpiar");
 btnLimpiar.addEventListener("click", respuestaBtnLimpiar);
 function respuestaBtnLimpiar() {
   console.log("Se ha limpiado el formulario");
 }
+
 //------Agregando tabla-----------------------------------------------
 
 function mostrarDatos() {
