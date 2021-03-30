@@ -65,7 +65,10 @@ function respuestaBtnAgregar() {
   );
   listaEmpleados.push(usu);
   mostrarDatos();
+  mostrarAlerta();
+  esconderAlerta();
   guardaEmpleadosLocalStorage();
+  
   console.log(listaEmpleados);
 }
 // -----Almacenando datos ingresados por el usuario en el local storage------
@@ -87,6 +90,24 @@ function cargarEmpleados(){
   }
 }
 
+// Alerta ventana personal agregado a la tabla
+
+function mostrarAlerta(){
+  let esconder = document.getElementById('alerta-agregar-personal');
+  esconder.classList.remove('alerta--esconder');
+}
+
+// Esconder alerta personal agregado a la tabla
+
+function esconderAlerta(){
+  let btnCerrar = document.getElementById('alerta__btn-cerrar');
+  btnCerrar.addEventListener('click', function(){
+    let esconder = document.getElementById('alerta-agregar-personal');
+    esconder.classList.add('alerta--esconder');
+    
+  })
+
+}
 // Mensaje consola de boton limpiar
 
 let btnLimpiar = document.getElementById("btnLimpiar");
