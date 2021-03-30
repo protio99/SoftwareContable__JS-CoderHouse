@@ -27,7 +27,6 @@ class Empleado {
 
 let listaEmpleados = [];
 
-
 //-------------------------------
 
 //Obteniendo datos ingresados por el usuario
@@ -63,51 +62,71 @@ function respuestaBtnAgregar() {
     inpTel.value,
     inpSalario.value
   );
-  listaEmpleados.push(usu);
-  mostrarDatos();
-  mostrarAlerta();
-  esconderAlerta();
-  guardaEmpleadosLocalStorage();
+  let validacion = validacionFormulario(usu);
+
+  if (validacion) {
+    listaEmpleados.push(usu);
+    mostrarDatos();
+    mostrarAlerta();
+    esconderAlerta();
+    guardaEmpleadosLocalStorage();
+    console.log(listaEmpleados);
+  }
   
-  console.log(listaEmpleados);
+  
+
+  
 }
+//----Validacion formulario
+
+function validacionFormulario(usu) {
+  console.log(usu);
+  const claves = Object.keys(usu)
+  console.log(claves);
+  for (let i = 0; i < claves.length; i++) {
+    const clave = claves[i];
+    if (usu[clave]==''){
+      alert('Campo vacio, debe agregar el dato');
+      return false;
+    }
+  } return true;
+}
+
 // -----Almacenando datos ingresados por el usuario en el local storage------
 
-function guardaEmpleadosLocalStorage(){
+function guardaEmpleadosLocalStorage() {
+
   let listaEmpleadosEnString = JSON.stringify(listaEmpleados);
-  localStorage.setItem('listaEmpleados', listaEmpleadosEnString);
+  localStorage.setItem("listaEmpleados", listaEmpleadosEnString);
 }
 
-
-
-function cargarEmpleados(){
-  let listaStorage = JSON.parse(localStorage.getItem('listaEmpleados'));
+function cargarEmpleados() {
+  let listaStorage = JSON.parse(localStorage.getItem("listaEmpleados"));
   console.log(listaStorage);
   if (listaStorage != null) {
-    listaEmpleados = listaStorage
-    
+    listaEmpleados = listaStorage;
+
     mostrarDatos();
   }
 }
 
 // Alerta ventana personal agregado a la tabla
 
-function mostrarAlerta(){
-  let esconder = document.getElementById('alerta-agregar-personal');
-  esconder.classList.remove('alerta--esconder');
+function mostrarAlerta() {
+  let esconder = document.getElementById("alerta-agregar-personal");
+  esconder.classList.remove("alerta--esconder");
 }
 
 // Esconder alerta personal agregado a la tabla
 
-function esconderAlerta(){
-  let btnCerrar = document.getElementById('alerta__btn-cerrar');
-  btnCerrar.addEventListener('click', function(){
-    let esconder = document.getElementById('alerta-agregar-personal');
-    esconder.classList.add('alerta--esconder');
-    
-  })
-
+function esconderAlerta() {
+  let btnCerrar = document.getElementById("alerta__btn-cerrar");
+  btnCerrar.addEventListener("click", function () {
+    let esconder = document.getElementById("alerta-agregar-personal");
+    esconder.classList.add("alerta--esconder");
+  });
 }
+
 // Mensaje consola de boton limpiar
 
 let btnLimpiar = document.getElementById("btnLimpiar");
