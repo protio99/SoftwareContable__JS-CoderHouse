@@ -9,10 +9,8 @@ class Empleado {
     documento,
     fecha_nacimiento,
     lugar_nacimiento,
-    edad,
     direccion,
     telefono,
-    estado_civil,
     salario
   ) {
     this.nombres = nombres;
@@ -21,113 +19,109 @@ class Empleado {
     this.documento = documento;
     this.fecha_nacimiento = fecha_nacimiento;
     this.lugar_nacimiento = lugar_nacimiento;
-    this.edad = edad;
     this.direccion = direccion;
     this.telefono = telefono;
-    this.estado_civil = estado_civil;
     this.salario = salario;
   }
 }
 let listaEmpleados = [];
-//Saludo usuario ---------------------------
-const nombreUsuario = prompt("Ingrese nombre");
-const apellidosUsuario = prompt("Ingrese apellido");
-
-const usuario = {
-  nombre: nombreUsuario,
-  apellido: apellidosUsuario,
-};
-//---------------------------------
 
 //Obteniendo datos ingresados por el usuario
 
 let inpNombre = document.getElementById("inpNombre");
 let inpApellido = document.getElementById("inpApellido");
+let tipoDocumento = document.getElementById("tipoDocumento");
 let inpNumDocumento = document.getElementById("inpNumDocumento");
-let inpDocumento = document.getElementsByName("documento");
 let inpFechaNacimiento = document.getElementById("inpFechaNacimiento");
 let inpLugarNacimiento = document.getElementById("inpLugarNacimiento");
-let inpEdad = document.getElementById("inpEdad");
 let inpDirResidencia = document.getElementById("inpDirResidencia");
 let inpTel = document.getElementById("inpTel");
 let inpSalario = document.getElementById("inpSalario");
-let inpEstado_civil = document.getElementsByTagName("estado_civil");
 let visualizacion = document.getElementById("visualizacionTablaPersonal");
-let btnTabla = document.getElementById("btnTabla");
+
 // Agregando eventos
 //-----------------------------------------------
 // Avisos de botones
-let valorDocumento;
-let valorEstadoCivil;
+
 let btnAgregar = document.getElementById("btnAgregar");
 btnAgregar.addEventListener("click", respuestaBtnAgregar);
 
-function respuestaBtnAgregar(){
+function respuestaBtnAgregar() {
   console.log("Registro agregado exitosamente");
-  for (var i = 0, length = inpDocumento.length; i < length; i++) {
-    if (inpDocumento[i].checked) {
-      
-      valorDocumento = inpDocumento[i].value;
-  
-      break;
-    }
-  }
-
-  for (var i = 0, length = inpEstado_civil.length; i < length; i++) {
-    if (inpEstado_civil[i].checked) {
-      
-      valorEstadoCivil = inpEstado_civil[i].value;
-  
-      break;
-    }}
+  let usu = new Empleado(
+    inpNombre.value,
+    inpApellido.value,
+    tipoDocumento.value,
+    inpNumDocumento.value,
+    inpFechaNacimiento.value,
+    inpLugarNacimiento.value,
+    inpDirResidencia.value,
+    inpTel.value,
+    inpSalario.value
+  );
+  listaEmpleados.push(usu);
+  mostrarDatos();
+  console.log(listaEmpleados);
 }
 
 let btnLimpiar = document.getElementById("btnLimpiar");
 btnLimpiar.addEventListener("click", respuestaBtnLimpiar);
-function respuestaBtnLimpiar(){
+function respuestaBtnLimpiar() {
   console.log("Se ha limpiado el formulario");
 }
-//-----------------------------------------------------
+//------Agregando tabla-----------------------------------------------
 
-
-btnTabla.addEventListener("click", () => {
-  let usu = new Empleado(inpNombre.value, inpApellido.value, valorDocumento, inpDocumento.value,  inpFechaNacimiento.value, inpLugarNacimiento.value, inpEdad.value, inpDirResidencia.value, inpTel.value, valorEstadoCivil, inpSalario.value );
-  listaEmpleados.push(usu);
-  console.log(listaEmpleados);
-});
-
-btnAgregar.addEventListener("click", () => {
-  let tabla = "<table border=1>";
+function mostrarDatos() {
+  let tabla = "<table border=1 class='tabla-empleado'>";
 
   tabla =
     tabla +
-    `<tr bgcolor=grey><th>Nombre</th><th>Apellido</th><th>Tipo documento</th><th>Num. documento</th><th>Fecha nacimiento</th><th>Lugar nacimiento</th><th>Edad</th><th>Dir. Residencia</th><th>Telefono</th><th>Estado civil</th><th>Salario</th></tr>`;
+    `<tr bgcolor=grey>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Tipo documento</th>
+      <th>Num. documento</th>
+      <th>Fecha nacimiento</th>
+      <th>Lugar nacimiento</th>
+      <th>Dir. Residencia</th>
+      <th>Telefono</th>
+      <th>Salario</th>
+    </tr>`;
 
-  for (const elem of listaEmpleados) {
+  for (const empleado of listaEmpleados) {
     tabla =
       tabla +
-      "<tr><td>"+ elem.nombres + "</td><td>" + elem.apellidos + "</td><td>" + elem.tipoDocumento + "</td><td>" + elem.documento + "</td><td>" + elem.fecha_nacimiento + "</td><td>" + elem.lugar_nacimiento + "</td><td>" + elem.edad + "</td><td>" + elem.direccion + "</td><td>" + elem.telefono + "</td><td>" + elem.estado + "</td><td>" + elem.fecha_telefono + "</td></tr>";
+      "<tr><td>" +
+      empleado.nombres +
+      "</td><td>" +
+      empleado.apellidos +
+      "</td><td>" +
+      empleado.tipoDocumento +
+      "</td><td>" +
+      empleado.documento +
+      "</td><td>" +
+      empleado.fecha_nacimiento +
+      "</td><td>" +
+      empleado.lugar_nacimiento +
+      "</td><td>" +
+      empleado.direccion +
+      "</td><td>" +
+      empleado.telefono +
+      "</td><td>" +
+      empleado.salario +
+      "</td></tr>";
   }
 
   tabla = tabla + "</table>";
 
   visualizacion.innerHTML = tabla;
-});
-
-
-
-
+}
 
 /* localStorage.setItem("datos_usuario", JSON.stringify(usuario));
 
 const nombreDOM = document.getElementById('user_name');
 nombreDOM.innerText = usuario.nombre + ' ' + usuario.apellido;
  */
-
-
-
-
-
 
 // let numeroEmpleados = parseInt(
 //   prompt("Ingrese la cantidad de empleados que desea crear: ")

@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
+
+body{
+    font-family: "Nunito", sans-serif;
+    /* font-family: 'Josefin Sans', sans-serif;  */
+}
+#divisionPrincipal{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-around;
+    align-items: flex-start;
+    
+
+}
+
+/* Formulario ---------*/
+
+#divisionPrincipal__containerform-form{    
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#divisionPrincipal__containerform-form input,select,p, button{
+    margin: 0.5rem;
+}
+
+.card{
+    border: 1px #0098a3 solid;
+    border-radius: 4px;
+    padding: 1rem;
+    
+}
+
+.card--tabla{
+    width: 60%;
+}
+
+.card--form{
+    width: 30%;
+}
+
+.centrar{
+    text-align: center;
+}
+
+summary{
+    font-size: 18px;
+    font-weight: bold;
+}
