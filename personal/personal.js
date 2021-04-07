@@ -31,81 +31,70 @@ let listaEmpleados = [];
 
 //Obteniendo datos ingresados por el usuario
 
-let inpNombre = document.getElementById("inpNombre");
-let inpApellido = document.getElementById("inpApellido");
-let tipoDocumento = document.getElementById("tipoDocumento");
-let inpNumDocumento = document.getElementById("inpNumDocumento");
-let inpFechaNacimiento = document.getElementById("inpFechaNacimiento");
-let inpLugarNacimiento = document.getElementById("inpLugarNacimiento");
-let inpDirResidencia = document.getElementById("inpDirResidencia");
-let inpTel = document.getElementById("inpTel");
-let inpSalario = document.getElementById("inpSalario");
-let visualizacion = document.getElementById("visualizacionTablaPersonal");
+let inpNombre = $("#inpNombre");
+let inpApellido = $("#inpApellido");
+let tipoDocumento = $("#tipoDocumento");
+let inpNumDocumento = $("#inpNumDocumento");
+let inpFechaNacimiento = $("#inpFechaNacimiento");
+let inpLugarNacimiento = $("#inpLugarNacimiento");
+let inpDirResidencia = $("#inpDirResidencia");
+let inpTel = $("#inpTel");
+let inpSalario = $("#inpSalario");
+let visualizacion = $("#visualizacionTablaPersonal");
 cargarEmpleados();
 // Agregando eventos
 //-----------------------------------------------
 // Acciones botones, boton agregar
 
-let btnAgregar = document.getElementById("btnAgregar");
-btnAgregar.addEventListener("click", respuestaBtnAgregar);
+let btnAgregar = $("#btnAgregar");
+btnAgregar.on("click", respuestaBtnAgregar);
 
 function respuestaBtnAgregar() {
-  console.log("Registro agregado exitosamente");
   let usu = new Empleado(
-    inpNombre.value,
-    inpApellido.value,
-    tipoDocumento.value,
-    inpNumDocumento.value,
-    inpFechaNacimiento.value,
-    inpLugarNacimiento.value,
-    inpDirResidencia.value,
-    inpTel.value,
-    inpSalario.value
+    inpNombre.val(),
+    inpApellido.val(),
+    tipoDocumento.val(),
+    inpNumDocumento.val(),
+    inpFechaNacimiento.val(),
+    inpLugarNacimiento.val(),
+    inpDirResidencia.val(),
+    inpTel.val(),
+    inpSalario.val()
   );
   let validacion = validacionFormulario(usu);
-
   if (validacion) {
     listaEmpleados.push(usu);
     mostrarDatos();
     mostrarAlerta();
     esconderAlerta();
-    guardaEmpleadosLocalStorage();
-    console.log(listaEmpleados);
+    actualizarListaEmpleadosLocalStorage();
   }
-  
-  
-
-  
 }
 //----Validacion formulario
 
 function validacionFormulario(usu) {
-  console.log(usu);
-  const claves = Object.keys(usu)
-  console.log(claves);
+  const claves = Object.keys(usu);
   for (let i = 0; i < claves.length; i++) {
     const clave = claves[i];
-    if (usu[clave]==''){
-      alert('Campo vacio, debe agregar el dato');
+    if (usu[clave] == "") {
+      alert("Campo vacio, debe agregar el dato");
       return false;
     }
-  } return true;
+  }
+  return true;
 }
 
 // -----Almacenando datos ingresados por el usuario en el local storage------
 
-function guardaEmpleadosLocalStorage() {
-
+function actualizarListaEmpleadosLocalStorage() {
   let listaEmpleadosEnString = JSON.stringify(listaEmpleados);
   localStorage.setItem("listaEmpleados", listaEmpleadosEnString);
 }
 
 function cargarEmpleados() {
   let listaStorage = JSON.parse(localStorage.getItem("listaEmpleados"));
-  console.log(listaStorage);
   if (listaStorage != null) {
     listaEmpleados = listaStorage;
-
     mostrarDatos();
   }
 }
@@ -113,24 +102,24 @@ function cargarEmpleados() {
 // Alerta ventana personal agregado a la tabla
 
 function mostrarAlerta() {
-  let esconder = document.getElementById("alerta-agregar-personal");
+  let esconder = document.getElementById("#alerta-agregar-personal");
   esconder.classList.remove("alerta--esconder");
 }
 
 // Esconder alerta personal agregado a la tabla
 
 function esconderAlerta() {
-  let btnCerrar = document.getElementById("alerta__btn-cerrar");
-  btnCerrar.addEventListener("click", function () {
-    let esconder = document.getElementById("alerta-agregar-personal");
+  let btnCerrar = $("#alerta__btn-cerrar");
+  btnCerrar.on("click", function () {
+    let esconder = $("#alerta-agregar-personal");
     esconder.classList.add("alerta--esconder");
   });
 }
 
 // Mensaje consola de boton limpiar
 
-let btnLimpiar = document.getElementById("btnLimpiar");
-btnLimpiar.addEventListener("click", respuestaBtnLimpiar);
+let btnLimpiar = $("#btnLimpiar");
+btnLimpiar.on("click", respuestaBtnLimpiar);
 function respuestaBtnLimpiar() {
   console.log("Se ha limpiado el formulario");
 }
@@ -139,7 +128,6 @@ function respuestaBtnLimpiar() {
 
 function mostrarDatos() {
   let tabla = "<table border=1 class='tabla-empleado'>";
-
   tabla =
     tabla +
     `<tr bgcolor=grey>
@@ -152,9 +140,13 @@ function mostrarDatos() {
       <th>Dir. Residencia</th>
       <th>Telefono</th>
       <th>Salario</th>
+      <th>Eliminar</th>
+
     </tr>`;
 
-  for (const empleado of listaEmpleados) {
+  for (let i = 0; i < listaEmpleados.length; i++) {
+    const empleado = listaEmpleados[i];
+
     tabla =
       tabla +
       "<tr><td>" +
@@ -175,62 +167,26 @@ function mostrarDatos() {
       empleado.telefono +
       "</td><td>" +
       empleado.salario +
-      "</td></tr>";
+      "</td><td><i id='eliminar_" +
+      i +
+      "' class='fas fa-trash'></i></td></tr>";
   }
 
   tabla = tabla + "</table>";
 
-  visualizacion.innerHTML = tabla;
-}
+  visualizacion.append(tabla);
 
-/* localStorage.setItem("datos_usuario", JSON.stringify(usuario));
+  // este ciclo ayuda a asignar el evento eliminar con un click a los elementos de la tabla
 
-const nombreDOM = document.getElementById('user_name');
-nombreDOM.innerText = usuario.nombre + ' ' + usuario.apellido;
- */
-
-// let numeroEmpleados = parseInt(
-//   prompt("Ingrese la cantidad de empleados que desea crear: ")
-//);
-/* 
-
-function pedirDatosEmpleado() {
-  for (let i = 1; i <= numeroEmpleados; i++) {
-    alert("Ingrese los datos del empleado " + i + " :");
-    let nombres = prompt("Ingrese nombres:");
-    let apellidos = prompt("Ingrese apellidos:");
-    let tipoDocumento = prompt("Ingrese tipo de documento:");
-    let documento = parseInt(prompt("Ingrese documento de identidad:"));
-    let fecha_nacimiento = parseInt(prompt("Ingrese fecha de nacimiento:"));
-    let lugar_nacimiento = prompt("Ingrese lugar de nacimiento:");
-    let edad = parseInt(prompt("Ingrese edad:"));
-    let direccion = prompt("Ingrese dirección de residencia:");
-    let telefono = parseInt(
-      prompt("Ingrese numero de telefono residencia o movil:")
-    );
-    let estado_civil = prompt("Ingrese estado civil:");
-    let salario = parseInt(prompt("Ingrese salario:"));
-    listaEmpleados[i] = new Empleado(
-      nombres,
-      apellidos,
-      tipoDocumento,
-      documento,
-      fecha_nacimiento,
-      lugar_nacimiento,
-      edad,
-      direccion,
-      telefono,
-      estado_civil,
-      salario
-    );
+  for (let i = 0; i < listaEmpleados.length; i++) {
+    $("#eliminar_" + i).on("click", function () {
+      eliminarEmpleadoTabla(i);
+    });
   }
 }
-if (numeroEmpleados > 0) {
-  pedirDatosEmpleado();
-  alert("Se agregaron " + numeroEmpleados + " nuevos.");
-  alert("Revise los empleados agregados en la consola: ");
-} else {
-  alert("Regresa cuando quiera ingresar nuevos empleados");
-}
 
-console.log(listaEmpleados); */
+function eliminarEmpleadoTabla(i) {
+  listaEmpleados.splice(i, 1);
+  actualizarListaEmpleadosLocalStorage();
+  mostrarDatos();
+}

@@ -49,3 +49,7 @@ summary{
     font-weight: bold;
     
 }
+
+#visualizacionTablaPersonal{
+    overflow-x: scroll;
+}
