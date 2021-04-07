@@ -102,7 +102,7 @@ function cargarEmpleados() {
 // Alerta ventana personal agregado a la tabla
 
 function mostrarAlerta() {
-  let esconder = document.getElementById("#alerta-agregar-personal");
+  let esconder = document.getElementById("alerta-agregar-personal");
   esconder.classList.remove("alerta--esconder");
 }
 
@@ -111,7 +111,7 @@ function mostrarAlerta() {
 function esconderAlerta() {
   let btnCerrar = $("#alerta__btn-cerrar");
   btnCerrar.on("click", function () {
-    let esconder = $("#alerta-agregar-personal");
+    let esconder = document.getElementById("alerta-agregar-personal");
     esconder.classList.add("alerta--esconder");
   });
 }
@@ -174,7 +174,7 @@ function mostrarDatos() {
 
   tabla = tabla + "</table>";
 
-  visualizacion.append(tabla);
+  visualizacion.html(tabla);
 
   // este ciclo ayuda a asignar el evento eliminar con un click a los elementos de la tabla
 
@@ -190,3 +190,20 @@ function eliminarEmpleadoTabla(i) {
   actualizarListaEmpleadosLocalStorage();
   mostrarDatos();
 }
+
+
+// -----------Buscar de la tabla ----------------
+/* 
+function buscarPor(){
+  
+  // $('#buscarPor').on('click', function(){
+    let categoriaBuscarPor = $('#buscarPor').val();
+    console.log(categoriaBuscarPor)
+    return categoriaBuscarPor;
+
+  // })
+}
+
+//function buscarEmpleado()
+
+buscarPor(); */
