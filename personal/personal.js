@@ -25,7 +25,7 @@ class Empleado {
   }
 }
 
-let listaEmpleados = [];
+let listaEmpleadosOriginal = [];
 
 //-------------------------------
 
@@ -63,8 +63,8 @@ function respuestaBtnAgregar() {
   );
   let validacion = validacionFormulario(usu);
   if (validacion) {
-    listaEmpleados.push(usu);
-    mostrarDatos();
+    listaEmpleadosOriginal.push(usu);
+    mostrarDatos(listaEmpleadosOriginal);
     mostrarAlerta();
     esconderAlerta();
     actualizarListaEmpleadosLocalStorage();
@@ -87,15 +87,15 @@ function validacionFormulario(usu) {
 // -----Almacenando datos ingresados por el usuario en el local storage------
 
 function actualizarListaEmpleadosLocalStorage() {
-  let listaEmpleadosEnString = JSON.stringify(listaEmpleados);
+  let listaEmpleadosEnString = JSON.stringify(listaEmpleadosOriginal);
   localStorage.setItem("listaEmpleados", listaEmpleadosEnString);
 }
 
 function cargarEmpleados() {
   let listaStorage = JSON.parse(localStorage.getItem("listaEmpleados"));
   if (listaStorage != null) {
-    listaEmpleados = listaStorage;
-    mostrarDatos();
+    listaEmpleadosOriginal = listaStorage;
+    mostrarDatos(listaEmpleadosOriginal);
   }
 }
 
@@ -126,7 +126,7 @@ function respuestaBtnLimpiar() {
 
 //------Agregando tabla-----------------------------------------------
 
-function mostrarDatos() {
+function mostrarDatos(listaEmpleados) {
   let tabla = "<table border=1 class='tabla-empleado'>";
   tabla =
     tabla +
@@ -186,24 +186,43 @@ function mostrarDatos() {
 }
 
 function eliminarEmpleadoTabla(i) {
-  listaEmpleados.splice(i, 1);
-  actualizarListaEmpleadosLocalStorage();
-  mostrarDatos();
+  listaEmpleadosOriginal.splice(i, 1);
+  actualizarlistaEmpleadosOriginalLocalStorage();
+  mostrarDatos(listaEmpleadosOriginal);
 }
-
 
 // -----------Buscar de la tabla ----------------
-/* 
-function buscarPor(){
-  
-  // $('#buscarPor').on('click', function(){
-    let categoriaBuscarPor = $('#buscarPor').val();
-    console.log(categoriaBuscarPor)
-    return categoriaBuscarPor;
 
-  // })
+
+function parametroBusqueda(elemento){
+  let valIngresado = $("#inpBuscar").val().toLowerCase();
+  let buscarPor = $('#buscarPor').val()
+  if (buscarPor == 'vacio') {
+    return  elemento['nombres'].toLowerCase().includes(valIngresado);    
+  }else{
+    return  elemento[buscarPor].toLowerCase().includes(valIngresado);    
+
+  }
+  
 }
 
-//function buscarEmpleado()
 
-buscarPor(); */
+function muestraResultadoBusqueda() {
+  let resultadoBusqueda = listaEmpleadosOriginal.filter(parametroBusqueda);
+  console.log(resultadoBusqueda);
+  mostrarDatos(resultadoBusqueda)
+}
+
+function leeInputUsuario() {
+  $("#inpBuscar").on("keyup", function () {
+    muestraResultadoBusqueda();
+  });
+}
+leeInputUsuario();
+
+
+function filter(callback) {
+  
+  callback(elemLista)
+}
+

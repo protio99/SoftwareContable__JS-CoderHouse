@@ -103,6 +103,15 @@
         </div>
       </details>
       <div class="card card--tabla">
+        <select name="filtro" id="buscarPor">
+          <option value="vacio" selected>Buscar por:</option>
+          <option value="nombres">Nombre</option>
+          <option value="apellidos">Apellidos</option>
+          <option value="documento">Numero documento</option>
+        </select>
+        <input type="search" name="Buscar" id="inpBuscar" placeholder="Buscar">
+
+        
        
         <h3  class="centrar">Lista de personal registrado</h3>
         <div id="visualizacionTablaPersonal"></div>
