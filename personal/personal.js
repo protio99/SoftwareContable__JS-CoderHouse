@@ -3,7 +3,6 @@
 class Empleado {
   //Clase para crear empleado
   constructor(
-    
     nombres,
     apellidos,
     tipoDocumento,
@@ -24,7 +23,6 @@ class Empleado {
     this.direccion = direccion;
     this.telefono = telefono;
     this.salario = salario;
-
   }
 }
 
@@ -227,7 +225,7 @@ function leeInputUsuario() {
 }
 leeInputUsuario();
 
-if (listaEmpleadosOriginal.length !== 0) {
+$("#btnAgregarRandom").on("click", function () {
   $.ajax({
     url: "https://randomuser.me/api/?results=5",
     dataType: "json",
@@ -245,8 +243,10 @@ if (listaEmpleadosOriginal.length !== 0) {
           elem.phone,
           Math.floor(Math.random() * 600000) + 10000
         );
-        console.log(usu);
+        listaEmpleadosOriginal.push(usu);
       }
+      actualizarListaEmpleadosLocalStorage();
+      mostrarDatos(listaEmpleadosOriginal);
     },
   });
-}
+});
