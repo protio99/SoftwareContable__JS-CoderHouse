@@ -3,6 +3,7 @@
 class Empleado {
   //Clase para crear empleado
   constructor(
+    
     nombres,
     apellidos,
     tipoDocumento,
@@ -13,6 +14,7 @@ class Empleado {
     telefono,
     salario
   ) {
+    this.id = Date.now();
     this.nombres = nombres;
     this.apellidos = apellidos;
     this.tipoDocumento = tipoDocumento;
@@ -22,6 +24,7 @@ class Empleado {
     this.direccion = direccion;
     this.telefono = telefono;
     this.salario = salario;
+
   }
 }
 
@@ -168,7 +171,7 @@ function mostrarDatos(listaEmpleados) {
       "</td><td>" +
       empleado.salario +
       "</td><td><i id='eliminar_" +
-      i +
+      empleado.id +
       "' class='fas fa-trash'></i></td></tr>";
   }
 
@@ -179,8 +182,10 @@ function mostrarDatos(listaEmpleados) {
   // este ciclo ayuda a asignar el evento eliminar con un click a los elementos de la tabla
 
   for (let i = 0; i < listaEmpleados.length; i++) {
-    $("#eliminar_" + i).on("click", function () {
-      eliminarEmpleadoTabla(i);
+    const empleado = listaEmpleados[i];
+
+    $("#eliminar_" + empleado.id).on("click", function () {
+      eliminarEmpleadoTabla(empleado.id);
     });
   }
 }
@@ -226,3 +231,6 @@ function filter(callback) {
   callback(elemLista)
 }
 
+//------------------------------------------------
+
+console.log(listaEmpleadosOriginal);
