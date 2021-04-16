@@ -69,7 +69,6 @@ function respuestaBtnAgregar() {
     listaEmpleadosOriginal.push(usu);
     mostrarDatos(listaEmpleadosOriginal);
     mostrarAlerta();
-    esconderAlerta();
     actualizarListaEmpleadosLocalStorage();
   }
 }
@@ -105,19 +104,26 @@ function cargarEmpleados() {
 // Alerta ventana personal agregado a la tabla
 
 function mostrarAlerta() {
-  let esconder = document.getElementById("alerta-agregar-personal");
-  esconder.classList.remove("alerta--esconder");
+  $("#alerta-agregar-personal").show().animate({
+    opacity: "1",
+  });
 }
 
 // Esconder alerta personal agregado a la tabla
 
-function esconderAlerta() {
-  let btnCerrar = $("#alerta__btn-cerrar");
-  btnCerrar.on("click", function () {
-    let esconder = document.getElementById("alerta-agregar-personal");
-    esconder.classList.add("alerta--esconder");
-  });
-}
+let btnCerrar = $("#alerta__btn-cerrar");
+btnCerrar.on("click", function () {
+  $("#alerta-agregar-personal").animate(
+    {
+      opacity: "0",
+      top: "0",
+    },
+    () => {
+      $("#alerta-agregar-personal").hide();
+    }
+  );
+});
+$("#alerta-agregar-personal").hide();
 
 // Mensaje consola de boton limpiar
 
@@ -192,30 +198,26 @@ function mostrarDatos(listaEmpleados) {
 
 function eliminarEmpleadoTabla(i) {
   listaEmpleadosOriginal.splice(i, 1);
-  actualizarlistaEmpleadosOriginalLocalStorage();
+  actualizarListaEmpleadosLocalStorage();
   mostrarDatos(listaEmpleadosOriginal);
 }
 
 // -----------Buscar de la tabla ----------------
 
-
-function parametroBusqueda(elemento){
+function parametroBusqueda(elemento) {
   let valIngresado = $("#inpBuscar").val().toLowerCase();
-  let buscarPor = $('#buscarPor').val()
-  if (buscarPor == 'vacio') {
-    return  elemento['nombres'].toLowerCase().includes(valIngresado);    
-  }else{
-    return  elemento[buscarPor].toLowerCase().includes(valIngresado);    
-
+  let buscarPor = $("#buscarPor").val();
+  if (buscarPor == "vacio") {
+    return elemento["nombres"].toLowerCase().includes(valIngresado);
+  } else {
+    return elemento[buscarPor].toLowerCase().includes(valIngresado);
   }
-  
 }
-
 
 function muestraResultadoBusqueda() {
   let resultadoBusqueda = listaEmpleadosOriginal.filter(parametroBusqueda);
   console.log(resultadoBusqueda);
-  mostrarDatos(resultadoBusqueda)
+  mostrarDatos(resultadoBusqueda);
 }
 
 function leeInputUsuario() {
@@ -225,12 +227,26 @@ function leeInputUsuario() {
 }
 leeInputUsuario();
 
-
-function filter(callback) {
-  
-  callback(elemLista)
+if (listaEmpleadosOriginal.length !== 0) {
+  $.ajax({
+    url: "https://randomuser.me/api/?results=5",
+    dataType: "json",
+    success: function (data) {
+      for (let i = 0; i < 5; i++) {
+        const elem = data.results[i];
+        const usu = new Empleado(
+          elem.name.first,
+          elem.name.last,
+          "CC",
+          elem.id.value,
+          elem.dob.date,
+          elem.nat,
+          elem.location.street.name,
+          elem.phone,
+          Math.floor(Math.random() * 600000) + 10000
+        );
+        console.log(usu);
+      }
+    },
+  });
 }
-
-//------------------------------------------------
-
-console.log(listaEmpleadosOriginal);
